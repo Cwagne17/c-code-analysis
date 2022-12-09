@@ -1,5 +1,7 @@
 /**
- * if buf is smaller then 800 and len = 800 then more memory then exists in the src will be copied into kbuf
+ * A buffer overflow exists in the copy_something function.
+ * If buf is smaller then 800, such as 0. Then the memcpy will try and copy a negative size.
+ * This would lead to unexpected behavior with the memory contents.
 */
 
 int copy_something(char *buf, int len){
@@ -7,10 +9,6 @@ int copy_something(char *buf, int len){
     if(len > sizeof(kbuf)){ // if int is greater then 800
         return -1;
     }
-    /**
-     *  dest − This is pointer to the destination array where the content is to be copied, type-casted to a pointer of type void*.
-     *  src − This is pointer to the source of data to be copied, type-casted to a pointer of type void*.
-     *  n − This is the number of bytes to be copied.
-    */
+
     return memcpy(kbuf, buf, len);
 }

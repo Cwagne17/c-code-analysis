@@ -1,3 +1,10 @@
+/**
+ * In the rsbac_acl_sys_group function a buffer overflow vulnerability is present.
+ * The function checks that the maxnum is less then or equal to zero but in the case
+ * where !arg.get_group_members.group evaluates to true then maxnum can be any value.
+ * This would then cause vmalloc to write to much to memory allowing for a buffer overflow attack to take place.
+*/
+
 // This example was taken from a security module for linux. This code runs in the kernel context:
 int rsbac_acl_sys_group( enum rsbac_acl_group_syscall_type_t call, union rsbac_acl_group_syscall_arg_t arg){
     switch(call) {
